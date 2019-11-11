@@ -1,0 +1,806 @@
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700,900&amp;display=swap" rel="stylesheet">
+
+    <title>Space Kings Character Card</title>
+    <style type="text/css">
+    .sk-container {
+      border: 2px solid black;
+      border-radius: 20px;
+      padding: 15px 35px 15px 35px;
+      font-family: 'Nunito Sans', sans-serif;
+    }
+    .sk-header {
+      font-size: 20px;
+      font-weight: 900;
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+    .sk-round-border {
+      border: 2px solid #000000;
+      border-radius: 10px;
+    }
+    @media (min-width: 0px) {
+      .sk-title {
+        font-weight: 900;
+        font-size: 3em;
+      }
+      .sk-attribute-ball {
+        margin-left: 1px;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+      }
+    }
+    @media (min-width: 768px) {
+       .sk-attribute-ball {
+        margin-left: 1px;
+        border-radius: 50%;
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+    .sk-attribute-on {
+      background: black;
+      border: 1px solid black;
+    }
+    .sk-attribute-off {
+      background: white;
+      border: 1px solid black;
+    }
+    .sk-attribute {
+      width: 48%;
+    }
+    .sk-attribute-name {
+      color: darkgray;
+      font-size: 4vw;
+    }
+    .sk-hp {
+      border: 2px solid black;
+      border-radius: 50%;
+      width: 85px;
+      height: 85px;
+    }
+    .sk-hp-small {
+      font-size: 0.5em;
+    }
+    .sk-hp-label {
+      font-size: 2.5em;
+      line-height: 0.85em;
+    }
+    .sk-hp-bar {
+      margin-top: 1.25em;
+      margin-bottom: 0.25em;
+      background-color: white;
+      border: 2px solid black;
+      border-radius: 0px 10px 0px 10px;
+      height: 35px;
+    }
+	.sk-hp-bar-bg {
+		position: relative;
+		left: -2px;
+		top: -2px;
+		border: 2px solid black;
+		border-radius: 0px 10px 0px 10px;
+		height: 35px;
+		width: 101%;
+		background-color: whitesmoke;
+	}
+    .sk-hp-bar:after {
+      position: absolute;
+      background: black;
+      width: 50%;
+    }
+    .sk-stats-label {
+      font-size: 1.2em;
+      font-weight: 300;
+    }
+    .sk-stats-small {
+      font-size: 0.5em;
+      flex-grow: 1;
+    }
+    .sk-stats-big {
+      font-size: 2.5em;
+    }
+    @media (min-width: 0px) {
+      .sk-stats-element {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    @media (min-width: 768px) {
+      .sk-stats-element {
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .sk-inventory-items {
+      min-width: 200px;
+    }
+    .sk-round-border-padding {
+     padding: 2px 10px 2px 10px;
+    }
+    .sk-joker {
+      width: 30px;
+      height: 30px;
+      border: 2px solid black;
+    }
+	.ball-border ~ sk-attribute-ball {
+		margin-bottom: 10px;
+	}
+    </style>
+	</head>
+	<body>
+    <div class="container sk-container mt-3 mb-3" id="app">
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				<h1 class="sk-title">Space Kings</h1>
+			</div>
+			<div class="col d-flex">
+				<div class="d-flex flex-column flex-grow-1">
+					<div>{{ $t('character') }}: {{ name }}</div>
+					<div>{{ $t('player') }}: {{ player }}</div>
+					<div>{{ $t('concept') }}: {{ concept }}</div>
+				</div>
+				<div class="d-flex flex-column align-items-center">
+					<div>{{ $t('anti_joker') }}</div>
+					<div class="sk-joker d-flex justify-content-center align-items-center">
+						{{ this.anti_joker }}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				<div class="sk-round-border sk-round-border-padding">
+					<div class="sk-inventory-header">{{ $t('appearance') }}</div>
+					<div class="d-flex flex-column justify-content-between" style="height: 365px">
+						<div class="flex-grow-1">
+							<!-- photo here -->
+						</div>
+						<div class="d-flex flex-wrap align-items-center">
+							<div class="sk-inventory-header" style="margin-right: 30px; width: 40%">{{ $t('race') }}: {{ race }}</div>
+							<div class="sk-inventory-header" style="margin-right: 30px">{{ $t('planet') }}: {{ planet }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6">
+				<div id="attributes">
+					<div class="sk-header">
+					  {{ $t('attributes') }}
+					</div>
+					<div style="display: flex; align-items: center; justify-content: space-between; flex-direction: row; flex-wrap: wrap; flex-flow: row wrap; align-content: flex-end;">
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('brawn') }}</div>
+							<point-display v-bind:current="this.brawn()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('agility') }}</div>
+							<point-display v-bind:current="this.agility()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('intelligence') }}</div>
+							<point-display v-bind:current="this.intelligence()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('wit') }}</div>
+							<point-display v-bind:current="this.wit()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('charm') }}</div>
+							<point-display v-bind:current="this.charm()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('presence') }}</div>
+							<point-display v-bind:current="this.presence()"></point-display>
+						</div>
+					</div>
+				</div>
+				<div id="health">
+					<div class="sk-header">{{ $t('health') }}</div>
+					<div class="d-flex">
+						<div class="sk-hp d-flex flex-column align-items-center justify-content-center">
+							<div class="sk-hp-small">{{ $t('health_points') }}</div>
+							<div class="sk-hp-label">{{ health_points }}/{{ max_health() }}</div>
+							<div class="sk-hp-small">{{ $t('max_label') }}</div>
+						</div>
+						<div class="flex-grow-1">
+							<div class="sk-hp-bar">
+								<div class="sk-hp-bar-bg"></div>
+							</div>
+							<div class="d-flex justify-content-around">
+								<span class="sk-inventory-header">{{ $t('injured') }}: {{ vounded() }}</span>
+								<span class="sk-inventory-header">{{ $t('unconscious') }}: {{ unconcious() }}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="stats">
+					<div class="sk-header">{{ $t('stats') }}</div>
+					<div class="d-flex justify-content-between">
+						<div class="sk-stats-element">
+							<div class="sk-stats-label text-center">{{ $t('initiative') }}</div>
+							<div class="sk-stats-small text-center">{{ $t('presence') }} + {{ $t('agility') }}</div>
+						</div>
+						<div class="sk-stats-element">
+							<div class="sk-stats-label text-center">{{ $t('dodge') }}</div>
+							<div class="sk-stats-small text-center">{{ $t('agility') }} + {{ $t('wit') }} - 2</div>
+						</div>
+						<div class="sk-stats-element">
+							<div class="sk-stats-label text-center">{{ $t('drive') }}</div>
+							<div class="sk-stats-small text-center">{{ $t('wit') }} + {{ $t('presence') }}</div>
+						</div>
+						<div class="sk-stats-element">
+							<div class="sk-stats-label text-center">{{ $t('crit') }}</div>
+							<div class="sk-stats-small text-center">Q x {{ $t('charm') }} + 1</div>
+						</div>
+					</div>
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="sk-stats-element">
+							<div class="sk-stats-box sk-stats-big">
+								{{ initiative() }}
+							</div>
+						</div>
+						<div class="sk-stats-element">
+							<div class="sk-stats-box sk-stats-big">
+								{{ dodge() }}
+							</div>
+						</div>
+						<div class="sk-stats-element">
+							<div class="sk-stats-box sk-stats-big ball-border">
+								<point-display class="flex-wrap justify-content-center" style="width: 2.1em;" v-bind:current="this.drive" v-bind:max="8"></point-display>
+							</div>
+						</div>
+						<div class="sk-stats-element">
+							<div class="sk-stats-box sk-stats-big">
+								{{ crit() }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				<div id="inventory">
+					<div class="sk-header">{{ $t('inventory') }}</div>
+					<div class="d-flex flex-column" style="height: 330px">
+						<div class="sk-stats-label">{{ $t('useful_items') }}</div>
+						<div class="sk-round-border sk-round-border-padding d-flex flex-column flex-grow-1">
+							<!-- useful items -->
+						</div>
+						<div class="sk-stats-label">{{ $t('nonuseful_items') }}</div>
+						<div class="sk-round-border sk-round-border-padding flex-grow-1">
+							<!-- non useful items -->
+						</div>
+						<div class="d-flex flex-wrap align-items-center" style="margin-top: 10px">
+							<div class="sk-stats-label" style="margin-right: 30px">{{ $t('hero_points') }}</div>
+							<point-display v-bind:current="this.hero_points" v-bind:max="9"></point-display>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6">
+				<div id="skills">
+					<div class="sk-header">{{ $t('skills') }}</div>
+					<div style="display: flex; align-items: center; justify-content: space-between; flex-direction: row; flex-wrap: wrap; flex-flow: row wrap; align-content: flex-end;">
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('athletics') }}</div>
+							<point-display v-bind:current="this.athletics()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('melee') }}</div>
+							<point-display v-bind:current="this.melee()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('biology') }}</div>
+							<point-display v-bind:current="this.biology()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('performing') }}</div>
+							<point-display v-bind:current="this.performing()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('computers') }}</div>
+							<point-display v-bind:current="this.computers()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('piloting') }}</div>
+							<point-display v-bind:current="this.piloting()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('empathy') }}</div>
+							<point-display v-bind:current="this.empathy()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('persuasion') }}</div>
+							<point-display v-bind:current="this.persuasion()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('engineering') }}</div>
+							<point-display v-bind:current="this.engineering()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('sneaking') }}</div>
+							<point-display v-bind:current="this.sneaking()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('explosives') }}</div>
+							<point-display v-bind:current="this.explosives()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('spacewise') }}</div>
+							<point-display v-bind:current="this.spacewise()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('firearms') }}</div>
+							<point-display v-bind:current="this.firearms()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('survival') }}</div>
+							<point-display v-bind:current="this.survival()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('investigation') }}</div>
+							<point-display v-bind:current="this.investigation()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('telekinesis') }}</div>
+							<point-display v-bind:current="this.telekinesis()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('law') }}</div>
+							<point-display v-bind:current="this.law()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('telepathy') }}</div>
+							<point-display v-bind:current="this.telepathy()"></point-display>
+						</div>
+						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
+							<div class="sk-atrribute-name text-center text-md-left">{{ $t('lying') }}</div>
+							<point-display v-bind:current="this.lying()"></point-display>
+						</div>
+					</div>
+				</div>
+				<div id="ultimates">
+					<div class="sk-header">{{ $t('ultimates') }}</div>
+					<div>1. {{ u1 }}</div>
+					<div>2. {{ u2 }}</div>
+				</div>
+			</div>
+		</div>
+
+	  	<div class="container mt-5">
+			<div class="row">
+				<div class="col-md-6">
+					<label>Import / Export</label>
+					<textarea class="form-control" v-model="importexport"></textarea>
+					<div class="btn-group">
+						<button class="btn btn-outline-secondary" v-on:click="importData">Import</button>
+						<button class="btn btn-outline-secondary" v-on:click="exportData">Export</button>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label>Languare</label>
+					<select @change="localeChange($event)" class="form-control">
+						<option value="en">English</option>
+						<option value="pl">Polski</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="container mt-3">
+			<form>
+				<div class="form-row align-items-end">
+					<div class="col-md-2">
+						<label>{{ $t('attributes') }}</label>
+						<select @change="changeCardsA($event)" class="form-control">
+							<option value='0'>{{ $t('select_attribute') }}</option>
+							<option v-bind:value="this.brawn()">{{ $t('brawn') }}</option>
+							<option v-bind:value="this.agility()">{{ $t('agility') }}</option>
+							<option v-bind:value="this.intelligence()">{{ $t('intelligence') }}</option>
+							<option v-bind:value="this.wit()">{{ $t('wit') }}</option>
+							<option v-bind:value="this.charm()">{{ $t('charm') }}</option>
+							<option v-bind:value="this.presence()">{{ $t('presence') }}</option>
+						</select>
+					</div>
+					<div class="col-md-2">
+						<label>{{ $t('skills') }}</label>
+						<select @change="changeCardsS($event)" class="form-control">
+							<option value='0'>{{ $t('select_skill') }}</option>
+							<option v-bind:value="this.athletics()">{{ $t('athletics') }}</option>
+							<option v-bind:value="this.melee()">{{ $t('melee') }}</option>
+							<option v-bind:value="this.biology()">{{ $t('biology') }}</option>
+							<option v-bind:value="this.performing()">{{ $t('performing') }}</option>
+							<option v-bind:value="this.computers()">{{ $t('computers') }}</option>
+							<option v-bind:value="this.piloting()">{{ $t('piloting') }}</option>
+							<option v-bind:value="this.empathy()">{{ $t('empathy') }}</option>
+							<option v-bind:value="this.persuasion()">{{ $t('persuasion') }}</option>
+							<option v-bind:value="this.engineering()">{{ $t('engineering') }}</option>
+							<option v-bind:value="this.sneaking()">{{ $t('sneaking') }}</option>
+							<option v-bind:value="this.explosives()">{{ $t('explosives') }}</option>
+							<option v-bind:value="this.spacewise()">{{ $t('spacewise') }}</option>
+							<option v-bind:value="this.firearms()">{{ $t('firearms') }}</option>
+							<option v-bind:value="this.survival()">{{ $t('survival') }}</option>
+							<option v-bind:value="this.investigation()">{{ $t('investigation') }}</option>
+							<option v-bind:value="this.telekinesis()">{{ $t('telekinesis') }}</option>
+							<option v-bind:value="this.law()">{{ $t('law') }}</option>
+							<option v-bind:value="this.telepathy()">{{ $t('telepathy') }}</option>
+							<option v-bind:value="this.lying()">{{ $t('lying') }}</option>
+						</select>
+					</div>
+					<div class="col">
+						<button type="button" @click="useDrive()" class="btn btn-outline-secondary">Used {{ this.cards_d }} drive</button>
+						<button type="button" @click="useHeroPoints()" class="btn btn-outline-secondary">Used {{ this.cards_hp }} hero point</button>
+					</div>
+					<div class="col" style="height: 30px">
+						= {{ recalculateCards() }} {{ $t('cards') }}
+					</div>
+					<div class="col-md-1">
+						<button type="button" @click="resetCardCalc()" class="btn btn-outline-secondary">Reset</button>
+					</div>
+				</div>
+			</form>
+
+			<div class="btn-group">
+				<button type="button" @click="addHealthPoints" class="btn btn-outline-secondary">+</button>
+				<div class="btn" style="border-top: 1px solid; border-bottom: 1px solid">{{ $t('health') }}</div>
+				<button type="button" @click="subHealthPoints" class="btn btn-outline-secondary">-</button>
+			</div>
+
+			<div class="btn-group">
+				<button type="button" @click="addHeroPoints" class="btn btn-outline-secondary">+</button>
+				<div class="btn" style="border-top: 1px solid; border-bottom: 1px solid">{{ $t('hero_points') }}</div>
+				<button type="button" @click="subHeroPoints" class="btn btn-outline-secondary">-</button>
+			</div>
+
+			<div class="btn-group">
+				<button type="button" @click="addDrive" class="btn btn-outline-secondary">+</button>
+				<div class="btn" style="border-top: 1px solid; border-bottom: 1px solid">{{ $t('drive') }}</div>
+				<button type="button" @click="subDrive" class="btn btn-outline-secondary">-</button>
+			</div>
+
+			<div class="btn-group">
+				<button type="button" @click="addAntiJoker" class="btn btn-outline-secondary">+</button>
+				<div class="btn" style="border-top: 1px solid; border-bottom: 1px solid">{{ $t('anti_joker') }}</div>
+				<button type="button" @click="subAntiJoker" class="btn btn-outline-secondary">-</button>
+			</div>
+		</div>
+    </div>
+
+	<script type="text/x-template" id="point-template">
+		<div class="d-flex">
+		  <div v-for="n in current" class="sk-attribute-ball sk-attribute-on"></div>
+		  <div v-for="n in (max - current)" class="sk-attribute-ball sk-attribute-off"></div>
+		</div>
+	</script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-i18n/8.14.1/vue-i18n.min.js"></script>
+	<script>
+		Vue.component('point-display', {
+			props: {
+				max: { type: Number, default: 4 },
+				current: { type: Number, default: 0}
+			},
+			template: '#point-template'
+		})
+
+		const i18n = new VueI18n({
+		  locale: 'en',
+		  messages: {
+			en: {
+				brawn: 'Brawn',
+				agility: 'Agility',
+				intelligence: 'Intelligence',
+				wit: 'Wit',
+				charm: 'Charm',
+				presence: 'Presence',
+				athletics: 'Athlethics',
+				melee: 'Melee',
+				biology: 'Biology',
+				performing: 'Performing',
+				computers: 'Computers',
+				piloting: 'Piloting',
+				empathy: 'Empathy',
+				persuasion: 'Persuasion',
+				engineering: 'Engineering',
+				sneaking: 'Sneaking',
+				explosives: 'Explosives',
+				spacewise: 'Spacewise',
+				firearms: 'Firearms',
+				survival: 'Survival',
+				investigation: 'Investigation',
+				telekinesis: 'Telekinesis',
+				law: 'Law',
+				telepathy: 'Telepathy',
+				lying: 'Lying',
+				character: 'Character',
+				player: 'Player',
+				concept: 'Concept',
+				appearance: 'Appearance',
+				attributes: 'Attributes',
+				health: 'Health',
+				stats: 'Stats',
+				skills: 'Skills',
+				inventory: 'Inventory',
+				ultimates: 'Ultimates',
+				race: 'Race',
+				planet: 'Planet',
+				anti_joker: 'Anti-Joker',
+				hero_points: 'Hero Points',
+				useful_items: 'Useful Items',
+				nonuseful_items: 'Non-Useful Items',
+				initiative: 'Initiative',
+				dodge: 'Dodge',
+				drive: 'Drive',
+				crit: 'Crit',
+				health_points: 'Total Health',
+				injured: 'Injured',
+				unconscious: 'Unconscious',
+				max_label: 'max',
+				cards: 'cards',
+				select_attribute: 'Select an attribute',
+				select_skill: 'Select a skill'
+			},
+			pl: {
+				brawn: 'Budowa',
+				agility: 'Zręczność',
+				intelligence: 'Inteligencja',
+				wit: 'Spryt',
+				charm: 'Urok',
+				presence: 'Prezencja',
+				athletics: 'Atletyka',
+				melee: 'Walka wręcz',
+				biology: 'Biologia',
+				performing: 'Występ',
+				computers: 'Komputery',
+				piloting: 'Pilotaż',
+				empathy: 'Empatia',
+				persuasion: 'Perswazja',
+				engineering: 'Inżynieria',
+				sneaking: 'Skradanie',
+				explosives: 'Materiały wybuchowe',
+				spacewise: 'Wiedza o Kosmosie',
+				firearms: 'Broń palna',
+				survival: 'Przetrwanie',
+				investigation: 'Dociekanie',
+				telekinesis: 'Telekineza',
+				law: 'Prawo',
+				telepathy: 'Telepatia',
+				lying: 'Blef',
+				character: 'Postać',
+				player: 'Gracz',
+				concept: 'Koncept',
+				appearance: 'Wygląd',
+				attributes: 'Atrybuty',
+				health: 'Zdrowie',
+				stats: 'Statystyki',
+				skills: 'Umiejętności',
+				inventory: 'Ekwipunek',
+				ultimates: 'Specjalne',
+				race: 'Rasa',
+				planet: 'Planeta',
+				anti_joker: 'Anti-Joker',
+				hero_points: 'Punkty Herosa',
+				useful_items: 'Przedmioty użyteczne',
+				nonuseful_items: 'Przedmioty bezużyteczne',
+				initiative: 'Inicjatywa',
+				dodge: 'Uniki',
+				drive: 'Zapęd',
+				crit: 'Kryt',
+				health_points: 'Punkty zdrowia',
+				injured: 'Ranny',
+				unconscious: 'Nieprzytomny',
+				max_label: 'maks',
+				cards: 'kart',
+				select_attribute: 'Wybierz atrybut',
+				select_skill: 'Wybierz umiejętność'
+			}
+		  }
+		})
+
+		var app = new Vue({
+		  i18n,
+		  el: '#app',
+		  data: {
+			importexport: '',
+			name: 'Blom',
+			player: 'Misza',
+			concept: '',
+			race: 'Ogr',
+			planet: 'Blem',
+			anti_joker: 0,
+			drive: 4,
+			health_points: 9,
+			hero_points: 1,
+			u1: '',
+			u2: '',
+			attribs: [3,2,4,1,2,3],
+			skills: [0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			cards_a: 0,
+			cards_s: 0,
+			cards_d: 0,
+			cards_hp: 0
+		  },
+		  methods: {
+			brawn: function() { return this.attribs[0]; },
+			agility: function() { return this.attribs[1]; },
+			intelligence: function() { return this.attribs[2]; },
+			wit: function() { return this.attribs[3]; },
+			charm: function() { return this.attribs[4]; },
+			presence: function() { return this.attribs[5]; },
+
+			athletics: function() { return this.skills[0]; },
+			melee: function() { return this.skills[1]; },
+			biology: function() { return this.skills[2]; },
+			performing: function() { return this.skills[3]; },
+			computers: function() { return this.skills[4]; },
+			piloting: function() { return this.skills[5]; },
+			empathy: function() { return this.skills[6]; },
+			persuasion: function() { return this.skills[7]; },
+			engineering: function() { return this.skills[8]; },
+			sneaking: function() { return this.skills[9]; },
+			explosives: function() { return this.skills[10]; },
+			spacewise: function() { return this.skills[11]; },
+			firearms: function() { return this.skills[12]; },
+			survival: function() { return this.skills[13]; },
+			investigation: function() { return this.skills[14]; },
+			telekinesis: function() { return this.skills[15]; },
+			law: function() { return this.skills[16]; },
+			telepathy: function() { return this.skills[17]; },
+			lying: function() { return this.skills[18]; },
+
+			max_health: function () { return this.brawn() * 3; },
+			vounded: function () { return Math.ceil(this.max_health() / 2); },
+			unconcious: function () { return Math.floor(this.max_health() / 3); },
+			initiative: function () { return this.presence() + this.agility(); },
+			dodge: function () { return this.agility() + this.wit() - 2; },
+			max_drive: function () { return this.wit() + this.presence(); },
+			crit: function () { return this.charm() + 1; },
+
+			localeChange: function(event) {	return this.$i18n.locale = event.target.value;	},
+			resetCardCalc: function() { this.cards_a = 0; this.cards_b = 0; this.cards_d = 0; this.cards_hp = 0; },
+			recalculateCards: function() {	return this.cards_a + this.cards_s + this.cards_d + this.cards_hp*2; },
+			changeCardsA: function(event) { this.cards_a = parseInt(event.target.value); },
+			changeCardsS: function(event) { this.cards_s = parseInt(event.target.value); },
+			useDrive: function() {
+				if(this.drive > 0) {
+					this.drive -= 1;
+					this.cards_d += 1;
+				} else {
+					return false;
+				}
+			},
+			useHeroPoints: function() {
+				if(this.hero_points > 0) {
+					this.hero_points -= 1;
+					this.cards_hp += 1;
+				} else {
+					return false;
+				}
+			},
+			addHealthPoints: function() { if(this.health_points < this.max_health()) { this.health_points += 1; } },
+			subHealthPoints: function() { if(this.health_points > 0) { this.health_points -= 1; } },
+			addHeroPoints: function() { if(this.hero_points < 8) { this.hero_points += 1; } },
+			subHeroPoints: function() { if(this.hero_points > 0) { this.hero_points -= 1; } },
+			addDrive: function() { if(this.drive < this.max_drive()) { this.drive += 1; } },
+			subDrive: function() { if(this.drive > 0) { this.drive -= 1; } },
+			addAntiJoker: function() { { this.anti_joker += 1; } },
+			subAntiJoker: function() { if(this.anti_joker > 0) { this.anti_joker -= 1; } },
+
+			importData: function() {
+				data = null;
+				try {
+					data = JSON.parse(this.importexport);
+				} catch {
+					return alert('Import failed - invalid JSON data');
+				}
+				this.name = data.name;
+				this.player = data.player;
+				this.concept = data.concept;
+				this.race = data.race;
+				this.planet = data.planet;
+				this.attribs = [
+					data.brawn,
+					data.agility,
+					data.intelligence,
+					data.wit,
+					data.charm,
+					data.presence
+				];
+				this.skills = [
+					data.athletics,
+					data.melee,
+					data.biology,
+					data.performing,
+					data.computers,
+					data.piloting,
+					data.empathy,
+					data.persuasion,
+					data.engineering,
+					data.sneaking,
+					data.explosives,
+					data.spacewise,
+					data.firearms,
+					data.survival,
+					data.investigation,
+					data.telekinesis,
+					data.law,
+					data.telepathy,
+					data.lying
+				]
+				this.anti_joker = data.anti_joker;
+				this.drive = data.drive;
+				this.hero_points = data.hero_points;
+				this.u1 = data.u1;
+				this.u2 = data.u2;
+				this.health_points = this.max_health();
+				this.drive = this.max_drive();
+			},
+			exportData: function() {
+				data = {
+					name: this.name,
+					player: this.player,
+					concept: this.concept,
+					race: this.race,
+					planet: this.planet,
+					brawn: this.brawn(),
+					agility: this.agility(),
+					intelligence: this.intelligence(),
+					wit: this.wit(),
+					charm: this.charm(),
+					presence: this.presence(),
+					athletics: this.athletics(),
+					melee: this.melee(),
+					biology: this.biology(),
+					performing: this.performing(),
+					computers: this.computers(),
+					piloting: this.piloting(),
+					empathy: this.empathy(),
+					persuasion: this.persuasion(),
+					engineering: this.engineering(),
+					sneaking: this.sneaking(),
+					explosives: this.explosives(),
+					spacewise: this.spacewise(),
+					firearms: this.firearms(),
+					survival: this.survival(),
+					investigation: this.investigation(),
+					telekinesis: this.telekinesis(),
+					law: this.law(),
+					telepathy: this.telepathy(),
+					lying: this.lying(),
+					hero_points: this.hero_points,
+					drive: this.drive,
+					anti_joker: this.anti_joker,
+					u1: this.u1,
+					u2: this.u2
+				};
+				this.importexport = JSON.stringify(data);
+				return true;
+			}
+		  }
+		})
+	</script>
+	</body>
+</html>
