@@ -4,7 +4,7 @@ This is an unofficial web character card from a game called [Space Kings](https:
 
 ## Getting started
 
-Simply download the html file and open in in your browser.
+Simply download the html file and open in in your browser or view it [HERE](https://mprostko.github.io/spacekings-character-card/character-card.html).
 
 ## Authors
 
