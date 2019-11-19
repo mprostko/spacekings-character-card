@@ -10,135 +10,162 @@
 
     <title>Space Kings Character Card</title>
     <style type="text/css">
-    .sk-container {
-      border: 2px solid black;
-      border-radius: 20px;
-      padding: 15px 35px 15px 35px;
-      font-family: 'Nunito Sans', sans-serif;
-    }
-    .sk-header {
-      font-size: 20px;
-      font-weight: 900;
-      text-align: center;
-      margin-top: 10px;
-      margin-bottom: 5px;
-    }
-    .sk-round-border {
-      border: 2px solid #000000;
-      border-radius: 10px;
-    }
-    @media (min-width: 0px) {
-      .sk-title {
+      .sk-container {
+        border: 2px solid black;
+        border-radius: 20px;
+        padding: 15px 35px 15px 35px;
+        font-family: 'Nunito Sans', sans-serif;
+      }
+      .sk-header {
+        font-size: 20px;
         font-weight: 900;
-        font-size: 3em;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        padding: 0 15px 0 15px;
+        position: relative;
       }
-      .sk-attribute-ball {
-        margin-left: 1px;
+      .sk-round-border {
+        border: 2px solid #000000;
+        border-radius: 10px;
+      }
+      @media (min-width: 0px) {
+        .sk-title {
+          font-weight: 900;
+          font-size: 3em;
+        }
+        .sk-attribute-ball {
+          margin-left: 1px;
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+        }
+      }
+      @media (min-width: 768px) {
+         .sk-attribute-ball {
+          margin-left: 1px;
+          border-radius: 50%;
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+      .sk-attribute-on {
+        background: black;
+        border: 1px solid black;
+      }
+      .sk-attribute-off {
+        background: white;
+        border: 1px solid black;
+      }
+      .sk-attribute {
+        width: 48%;
+      }
+      .sk-attribute-name {
+        color: darkgray;
+        font-size: 4vw;
+      }
+      .sk-hp {
+        border: 2px solid black;
         border-radius: 50%;
-        width: 20px;
-        height: 20px;
+        width: 85px;
+        height: 85px;
       }
-    }
-    @media (min-width: 768px) {
-       .sk-attribute-ball {
-        margin-left: 1px;
-        border-radius: 50%;
-        width: 1rem;
-        height: 1rem;
+      .sk-hp-small {
+        font-size: 0.5em;
       }
-    }
-    .sk-attribute-on {
-      background: black;
-      border: 1px solid black;
-    }
-    .sk-attribute-off {
-      background: white;
-      border: 1px solid black;
-    }
-    .sk-attribute {
-      width: 48%;
-    }
-    .sk-attribute-name {
-      color: darkgray;
-      font-size: 4vw;
-    }
-    .sk-hp {
-      border: 2px solid black;
-      border-radius: 50%;
-      width: 85px;
-      height: 85px;
-    }
-    .sk-hp-small {
-      font-size: 0.5em;
-    }
-    .sk-hp-label {
-      font-size: 2.5em;
-      line-height: 0.85em;
-    }
-    .sk-hp-bar {
-      margin-top: 1.25em;
-      margin-bottom: 0.25em;
-      background-color: white;
-      border: 2px solid black;
-      border-radius: 0px 10px 0px 10px;
-      height: 35px;
-    }
-	.sk-hp-bar-bg {
-		position: relative;
-		left: -2px;
-		top: -2px;
-		border: 2px solid black;
-		border-radius: 0px 10px 0px 10px;
-		height: 35px;
-		width: 101%;
-		background-color: whitesmoke;
-	}
-    .sk-hp-bar:after {
-      position: absolute;
-      background: black;
-      width: 50%;
-    }
-    .sk-stats-label {
-      font-size: 1.2em;
-      font-weight: 300;
-    }
-    .sk-stats-small {
-      font-size: 0.5em;
-      flex-grow: 1;
-    }
-    .sk-stats-big {
-      font-size: 2.5em;
-    }
-    @media (min-width: 0px) {
-      .sk-stats-element {
+      .sk-hp-label {
+        font-size: 2.5em;
+        line-height: 0.85em;
+      }
+      .sk-hp-bar {
+        margin-top: 1.25em;
+        margin-bottom: 0.25em;
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 0px 10px 0px 10px;
+        height: 35px;
+      }
+      .sk-hp-bar-bg {
+        position: relative;
+        left: -2px;
+        top: -2px;
+        border: 2px solid black;
+        border-radius: 0px 10px 0px 10px;
+        height: 35px;
+        width: 101%;
+        background-color: whitesmoke;
+      }
+      .sk-hp-bar:after {
+        position: absolute;
+        background: black;
         width: 50%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
       }
-    }
-    @media (min-width: 768px) {
-      .sk-stats-element {
-        width: 25%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+      .sk-stats-label {
+        font-size: 1.2em;
+        font-weight: 300;
       }
-    }
-    .sk-inventory-items {
-      min-width: 200px;
-    }
-    .sk-round-border-padding {
-     padding: 2px 10px 2px 10px;
-    }
-    .sk-joker {
-      width: 30px;
-      height: 30px;
-      border: 2px solid black;
-    }
-	.ball-border ~ sk-attribute-ball {
-		margin-bottom: 10px;
-	}
+      .sk-stats-small {
+        font-size: 0.5em;
+        flex-grow: 1;
+      }
+      .sk-stats-big {
+        font-size: 2.5em;
+      }
+      @media (min-width: 0px) {
+        .sk-stats-element {
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+      @media (min-width: 768px) {
+        .sk-stats-element {
+          width: 25%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+      .sk-inventory-items {
+        min-width: 200px;
+      }
+      .sk-round-border-padding {
+       padding: 2px 10px 2px 10px;
+      }
+      .sk-joker {
+        width: 30px;
+        height: 30px;
+        border: 2px solid black;
+      }
+      .ball-border ~ sk-attribute-ball {
+        margin-bottom: 10px;
+      }
+	    .sk-header-helper {
+		    display: flex;
+		    overflow: hidden;
+		    justify-content: center;
+	    }
+	    .sk-header-helper .sk-header::before {
+		    content: '';
+		    width: 9999px;
+		    height: 2px;
+		    position: absolute;
+		    top: 14px;
+		    background-color: black;
+		    pointer-events: none;
+		    right: 100%;
+	    }
+	    .sk-header-helper .sk-header::after {
+		    content: '';
+		    width: 9999px;
+		    height: 2px;
+		    position: absolute;
+		    top: 14px;
+		    background-color: black;
+		    pointer-events: none;
+		    left: 100%;
+	    }
     </style>
 	</head>
 	<body>
@@ -179,9 +206,9 @@
 			</div>
 			<div class="col-sm-12 col-md-6">
 				<div id="attributes">
-					<div class="sk-header">
-					  {{ $t('attributes') }}
-					</div>
+          <div class="sk-header-helper">
+            <div class="sk-header">{{ $t('attributes') }}</div>
+          </div>
 					<div style="display: flex; align-items: center; justify-content: space-between; flex-direction: row; flex-wrap: wrap; flex-flow: row wrap; align-content: flex-end;">
 						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
 							<div class="sk-atrribute-name text-center text-md-left">{{ $t('brawn') }}</div>
@@ -210,7 +237,9 @@
 					</div>
 				</div>
 				<div id="health">
-					<div class="sk-header">{{ $t('health') }}</div>
+          <div class="sk-header-helper">
+            <div class="sk-header">{{ $t('health') }}</div>
+          </div>
 					<div class="d-flex">
 						<div class="sk-hp d-flex flex-column align-items-center justify-content-center">
 							<div class="sk-hp-small">{{ $t('health_points') }}</div>
@@ -229,7 +258,9 @@
 					</div>
 				</div>
 				<div id="stats">
-					<div class="sk-header">{{ $t('stats') }}</div>
+          <div class="sk-header-helper">
+            <div class="sk-header">{{ $t('stats') }}</div>
+          </div>
 					<div class="d-flex justify-content-between">
 						<div class="sk-stats-element">
 							<div class="sk-stats-label text-center">{{ $t('initiative') }}</div>
@@ -277,7 +308,9 @@
 		<div class="row">
 			<div class="col-sm-12 col-md-6">
 				<div id="inventory">
-					<div class="sk-header">{{ $t('inventory') }}</div>
+          <div class="sk-header-helper">
+            <div class="sk-header">{{ $t('inventory') }}</div>
+          </div>
 					<div class="d-flex flex-column" style="height: 330px">
 						<div class="sk-stats-label">{{ $t('useful_items') }}</div>
 						<div class="sk-round-border sk-round-border-padding d-flex flex-column flex-grow-1">
@@ -296,7 +329,9 @@
 			</div>
 			<div class="col-sm-12 col-md-6">
 				<div id="skills">
-					<div class="sk-header">{{ $t('skills') }}</div>
+          <div class="sk-header-helper">
+            <div class="sk-header">{{ $t('skills') }}</div>
+          </div>
 					<div style="display: flex; align-items: center; justify-content: space-between; flex-direction: row; flex-wrap: wrap; flex-flow: row wrap; align-content: flex-end;">
 						<div class="sk-attribute d-flex justify-content-between align-items-center flex-column flex-md-row">
 							<div class="sk-atrribute-name text-center text-md-left">{{ $t('athletics') }}</div>
@@ -377,7 +412,9 @@
 					</div>
 				</div>
 				<div id="ultimates">
-					<div class="sk-header">{{ $t('ultimates') }}</div>
+          <div class="sk-header-helper">
+            <div class="sk-header">{{ $t('ultimates') }}</div>
+          </div>
 					<div>1. {{ u1 }}</div>
 					<div>2. {{ u2 }}</div>
 				</div>
@@ -395,7 +432,7 @@
 					</div>
 				</div>
 				<div class="col-md-6">
-					<label>Languare</label>
+					<label>Language</label>
 					<select @change="localeChange($event)" class="form-control">
 						<option value="en">English</option>
 						<option value="pl">Polski</option>
